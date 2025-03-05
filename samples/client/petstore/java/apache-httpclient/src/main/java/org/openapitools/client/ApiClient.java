@@ -167,6 +167,7 @@ public class ApiClient extends JavaTimeFormatter {
     objectMapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
     objectMapper.registerModule(new JavaTimeModule());
     objectMapper.registerModule(new JsonNullableModule());
+    objectMapper.registerModule(new RFC3339JavaTimeModule());
     objectMapper.setDateFormat(ApiClient.buildDefaultDateFormat());
 
     dateFormat = ApiClient.buildDefaultDateFormat();
@@ -477,7 +478,7 @@ public class ApiClient extends JavaTimeFormatter {
    * @param value The header's value
    * @return API client
    */
-  public ApiClient addDefaultHeader(String key, String value) {
+  public final ApiClient addDefaultHeader(String key, String value) {
     defaultHeaderMap.put(key, value);
     return this;
   }
